@@ -10,9 +10,9 @@ import sort.*;
  *
  * @author tadaki
  */
-public class CountSteps{
+public class CountSteps {
 
-    private AbstractSort<Data> sort;
+    private final AbstractSort<Data> sort;
 
     public CountSteps(AbstractSort<Data> sort) {
         this.sort = sort;
@@ -40,14 +40,27 @@ public class CountSteps{
      * @param args the command line arguments
      * @throws java.io.IOException
      */
-    public static void main(String[] args) throws IOException {
-        CountSteps cs=new CountSteps(new BubbleSort<>());
-        String filename =BubbleSort.class.getSimpleName()+".txt";
-        List<PerformanceData> list = cs.measure(16, 4096);
-        try (BufferedWriter out = FileIO.openWriter(filename)) {
-            for(PerformanceData p:list){
-                FileIO.writeSSV(out, p.n,p.numComp,p.numExch);
-            }}
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        List<AbstractSort<Data>> sorts = Utils.createList();
+        sorts.add(new BubbleSort<>());
+        sorts.add(new InsertionSort<>());
+        sorts.add(new BinaryInsertionSort<>());
+        sorts.add(new SelectionSort<>());
+        sorts.add(new MergeSort<>());
+        sorts.add(new QuickSort<>());
+
+        for (int i = 0; i < sorts.size(); i++) {
+            AbstractSort<Data> sort = sorts.get(i);
+            CountSteps cs = new CountSteps(sort);
+            String filename = sort.getClass().getSimpleName() + ".txt";
+            List<PerformanceData> list = cs.measure(16, 1024);
+            try (BufferedWriter out = FileIO.openWriter(filename)) {
+                for (PerformanceData p : list) {
+                    FileIO.writeSSV(out, p.n, p.numComp, p.numExch);
+                }
+            }
+        }
+
     }
 
 }
