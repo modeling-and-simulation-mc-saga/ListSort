@@ -40,7 +40,7 @@ public class CountSteps {
      * @param args the command line arguments
      * @throws java.io.IOException
      */
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException {
         List<AbstractSort<Data>> sorts = Utils.createList();
         sorts.add(new BubbleSort<>());
         sorts.add(new InsertionSort<>());
