@@ -3,8 +3,7 @@ package observation;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.List;
-import myLib.utils.FileIO;
-import myLib.utils.Utils;
+import myLib.utils.*;
 import sort.*;
 
 /**
@@ -42,7 +41,7 @@ public class CountSteps{
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
-        CountSteps cs=new CountSteps(new BubbleSort<Data>());
+        CountSteps cs=new CountSteps(new BubbleSort<>());
         String filename =BubbleSort.class.getSimpleName()+".txt";
         List<PerformanceData> list = cs.measure(16, 4096);
         try (BufferedWriter out = FileIO.openWriter(filename)) {

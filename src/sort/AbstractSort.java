@@ -20,7 +20,7 @@ public abstract class AbstractSort<T extends Comparable<T>> {
     protected List<T> data;//対象となるデータのリスト
     private int numSwap;//要素入替回数
     private int numComp;//要素比較回数
-    private boolean count = true;
+    private boolean counting = true;
     protected boolean debug = false;
 
     /**
@@ -65,14 +65,14 @@ public abstract class AbstractSort<T extends Comparable<T>> {
      * @return
      */
     protected boolean less(T v, T w) {
-        if (count) {
+        if (counting) {
             numComp++;
         }
         return (v.compareTo(w) < 0);
     }
 
     protected boolean lesseq(T v, T w) {
-        if (count) {
+        if (counting) {
             numComp++;
         }
         return (v.compareTo(w) <= 0);
@@ -107,7 +107,7 @@ public abstract class AbstractSort<T extends Comparable<T>> {
         T t = data.get(i);
         data.set(i, data.get(j));
         data.set(j, t);
-        if (count) {
+        if (counting) {
             numSwap++;
         }
     }
@@ -129,12 +129,12 @@ public abstract class AbstractSort<T extends Comparable<T>> {
      * @return
      */
     public boolean isSorted() {
-        count = false;
+        counting = false;
         boolean b = true;
         for (int i = 0; i < data.size() - 1 && b; i++) {
             b = b & lesseqByIndex(i, i + 1);
         }
-        count = true;
+        counting = true;
         return b;
     }
 
