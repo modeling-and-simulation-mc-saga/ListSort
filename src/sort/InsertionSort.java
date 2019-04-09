@@ -2,8 +2,6 @@ package sort;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -20,6 +18,11 @@ public class InsertionSort<T extends Comparable<T>>
     public InsertionSort() {
     }
 
+    /**
+     * sort の実装
+     *
+     * @return
+     */
     @Override
     public List<T> doSort() {
         int n = data.size();
@@ -28,15 +31,18 @@ public class InsertionSort<T extends Comparable<T>>
             if (k != i) {
                 insert(i, k);
             }
-            /*
-            for (int j = i; j > 0 && lessByIndex(j, j - 1); j--) {
-                swap(j, j - 1);
-            }
-             */
         }
         return data;
     }
 
+    /**
+     * 要素kを挿入する位置を調べるために、要素kよりも小さい要素を前方に向かって探す
+     *
+     * @param from 範囲の下限
+     * @param to 範囲の上限（toは含まれない）
+     * @param k
+     * @return 発見した位置、なかった場合はfromを返す
+     */
     protected int findPosition(int from, int to, int k) {
         for (int i = to - 1; i >= from; i--) {
             if (lesseqByIndex(i, k)) {
@@ -56,7 +62,7 @@ public class InsertionSort<T extends Comparable<T>>
 
         testRun(new InsertionSort<>(data));
         System.out.println("test stability");
-        List<Data> data2 = Data.createData(100,0.5);
+        List<Data> data2 = Data.createData(100, 0.5);
         testStable(new InsertionSort<>(data2));
     }
 

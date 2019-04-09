@@ -19,12 +19,23 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSort<T> {
         super();
     }
 
+    /**
+     * sort の実装
+     *
+     * @return
+     */
     @Override
     public List<T> doSort() {
         sortSub(0, data.size());
         return data;
     }
 
+    /**
+     * sortの実態：範囲を指定
+     *
+     * @param left
+     * @param right
+     */
     protected void sortSub(int left, int right) {
         if (right <= left) {
             throw new IllegalArgumentException("illegal range");
@@ -32,9 +43,11 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSort<T> {
         if (right == left + 1) {
             return;
         }
+        //範囲を二分割して再帰
         int middle = (right + left) / 2;
         sortSub(left, middle);
         sortSub(middle, right);
+        //二つの整列済みリストをmergeする
         List<T> tmpList = mergeList(left, middle, right);
         for (int p = 0; p < tmpList.size(); p++) {
             data.set(left + p, tmpList.get(p));
@@ -42,6 +55,14 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSort<T> {
 
     }
 
+    /**
+     * 二つの整列済みリストをmergeする
+     *
+     * @param left
+     * @param middle
+     * @param right
+     * @return
+     */
     private List<T> mergeList(int left, int middle, int right) {
         List<T> tmp = Utils.createList();
         int leftIndex = left;

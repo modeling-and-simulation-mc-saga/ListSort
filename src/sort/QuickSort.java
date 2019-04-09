@@ -6,6 +6,7 @@ import static sort.AbstractSort.testRun;
 
 /**
  * Quick Sort
+ *
  * @author tadaki
  * @param <T>
  */
@@ -19,12 +20,23 @@ public class QuickSort<T extends Comparable<T>>
     public QuickSort() {
     }
 
+    /**
+     * sort の実装
+     *
+     * @return
+     */
     @Override
     public List<T> doSort() {
         sortSub(0, data.size() - 1);
         return data;
     }
 
+    /**
+     * sortの実態：範囲を指定
+     *
+     * @param left
+     * @param right
+     */
     protected void sortSub(int left, int right) {
         if (right <= left) {
             return;
@@ -35,7 +47,9 @@ public class QuickSort<T extends Comparable<T>>
     }
 
     /**
-     * 分配作業：右端の要素よりも小さいものが戻り値よりも先に、 右端の要素よりも大きいものが戻り値よりも後になる
+     * 分配作業：右端の要素よりも小さいものが戻り値よりも先に、
+     *
+     * 右端の要素よりも大きいものが戻り値よりも後になる
      *
      * @param left 範囲の左端
      * @param right 範囲の右端
@@ -47,7 +61,8 @@ public class QuickSort<T extends Comparable<T>>
         T v = data.get(right);
 
         for (;;) {
-            while (less(data.get(++fromLeft), v)){}
+            while (less(data.get(++fromLeft), v)) {
+            }
             while (less(v, data.get(--fromRight))) {
                 if (fromRight == left) {
                     break;
