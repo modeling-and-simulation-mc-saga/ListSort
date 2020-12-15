@@ -27,7 +27,7 @@ public class InsertionSort<T extends Comparable<T>>
     public List<T> doSort() {
         int n = data.size();
 
-
+        //実装は課題とする
 
 
 
