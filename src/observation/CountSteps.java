@@ -44,7 +44,6 @@ public class CountSteps {
         List<AbstractSort<Data>> sorts = Utils.createList();
         sorts.add(new BubbleSort<>());
         sorts.add(new InsertionSort<>());
-        sorts.add(new BinaryInsertionSort<>());
         sorts.add(new SelectionSort<>());
         sorts.add(new MergeSort<>());
         sorts.add(new QuickSort<>());
