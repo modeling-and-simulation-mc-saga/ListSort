@@ -87,6 +87,6 @@ public class QuickSort<T extends Comparable<T>>
         testRun(new QuickSort<>(data));
         System.out.println("test stability");
         List<Data> data2 = Data.createData(100, 0.5);
-        testStable(new InsertionSort<>(data2));
+        testStable(new QuickSort<>(data2));
     }
 }

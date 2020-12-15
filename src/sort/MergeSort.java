@@ -99,6 +99,8 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSort<T> {
         int numData = 100;
         List<Data> data = Data.createData(numData);
         testRun(new MergeSort<>(data));
+        List<Data> data2 = Data.createData(100, 0.5);
+        testStable(new MergeSort<>(data2));
 
     }
 

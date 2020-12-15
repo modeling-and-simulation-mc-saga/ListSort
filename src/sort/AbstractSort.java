@@ -169,6 +169,9 @@ public abstract class AbstractSort<T extends Comparable<T>> {
         this.debug = debug;
     }
 
+    public int getSize(){
+        return data.size();
+    }
     /**
      * テストランを実施
      *
@@ -177,7 +180,12 @@ public abstract class AbstractSort<T extends Comparable<T>> {
      */
     static public void testRun(AbstractSort sort)
             throws IOException {
+        int numElement=sort.getSize();
         sort.doSort();
+        if(sort.getSize()!=numElement){
+            System.err.println("Num Element changes");
+            System.exit(-1);
+        }
         if (sort.isSorted()) {
             System.out.println("Sorting Completes");
             System.out.println("Number of Compare " + sort.getNumCompare());
@@ -190,9 +198,12 @@ public abstract class AbstractSort<T extends Comparable<T>> {
         }
     }
 
+    /**
+     * 整列結果の安定性を確認
+     * @param sort 
+     */
     static public void testStable(AbstractSort<Data> sort) {
         List<Data> data = sort.doSort();
-        System.out.println(sort.printList());
         if (sort.isSorted()) {
             boolean b = true;
             for (int i = 0; i < data.size() - 1 && b; i++) {
