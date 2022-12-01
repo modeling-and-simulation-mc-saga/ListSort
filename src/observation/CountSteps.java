@@ -1,16 +1,18 @@
 package observation;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.List;
-import myLib.utils.*;
 import sort.*;
 
 /**
  *
  * @author tadaki
  */
-public class CountSteps {
+
+public class CountSteps{
+
 
     private final AbstractSort<Data> sort;
 
@@ -26,7 +28,7 @@ public class CountSteps {
 
     public List<PerformanceData> measure(int min, int max) {
         int n = min;
-        List<PerformanceData> list = Utils.createList();
+        List<PerformanceData> list = new ArrayList<>();
         while (n <= max) {
             setRandomDataAndDo(n);
             list.add(new PerformanceData(n,
@@ -41,7 +43,7 @@ public class CountSteps {
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
-        List<AbstractSort<Data>> sorts = Utils.createList();
+        List<AbstractSort<Data>> sorts = new ArrayList<>();
         sorts.add(new BubbleSort<>());
         sorts.add(new InsertionSort<>());
         sorts.add(new SelectionSort<>());
@@ -53,10 +55,10 @@ public class CountSteps {
             CountSteps cs = new CountSteps(sort);
             String filename = sort.getClass().getSimpleName() + ".txt";
             List<PerformanceData> list = cs.measure(16, 1024);
-            try (BufferedWriter out = FileIO.openWriter(filename)) {
-                for (PerformanceData p : list) {
-                    FileIO.writeSSV(out, p.n, p.numComp, p.numExch);
-                }
+            try (PrintStream out = new PrintStream(filename)) {
+                list.forEach(p -> 
+                        out.println(p.n() + " " + p.numComp() + " " + p.numExch())
+                );
             }
         }
 
