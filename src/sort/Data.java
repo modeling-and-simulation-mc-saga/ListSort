@@ -1,7 +1,7 @@
 package sort;
 
+import java.util.ArrayList;
 import java.util.List;
-import myLib.utils.Utils;
 
 /**
  * 整列アルゴリズム用のサンプルデータクラス
@@ -59,7 +59,7 @@ public class Data implements Comparable<Data> {
          return createData(numData,10.);
      }
     static public List<Data> createData(int numData,double p) {
-        List<Data> data = Utils.createList();
+        List<Data> data = new ArrayList<>();
         for (int i = 0; i < numData; i++) {
             int k = (int) (p * numData * Math.random());
             data.add(new Data(String.valueOf(i), k));

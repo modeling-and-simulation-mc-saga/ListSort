@@ -1,11 +1,10 @@
 package sort;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import myLib.utils.FileIO;
 
 /**
  * リスト整列の抽象クラス。対象はComparableを実装
@@ -30,7 +29,7 @@ public abstract class AbstractSort<T extends Comparable<T>> {
      */
     public AbstractSort(List<T> list) {
         data = Collections.synchronizedList(new LinkedList<>());
-        list.stream().forEachOrdered(t -> data.add(t));
+        list.forEach(t -> data.add(t));
         numSwap = 0;
         numComp = 0;
     }
@@ -45,7 +44,7 @@ public abstract class AbstractSort<T extends Comparable<T>> {
      */
     public void setData(List<T> list) {
         data = Collections.synchronizedList(new LinkedList<>());
-        list.stream().forEachOrdered(t -> data.add(t));
+        list.forEach(t -> data.add(t));
         numSwap = 0;
         numComp = 0;
     }
@@ -145,7 +144,7 @@ public abstract class AbstractSort<T extends Comparable<T>> {
      */
     public String printList() {
         StringBuilder sb = new StringBuilder();
-        data.stream().forEachOrdered(d -> sb.append(d).append(LINE_SEPARATOR));
+        data.forEach(d -> sb.append(d).append(LINE_SEPARATOR));
         return sb.toString();
     }
 
@@ -190,8 +189,8 @@ public abstract class AbstractSort<T extends Comparable<T>> {
             System.out.println("Sorting Completes");
             System.out.println("Number of Compare " + sort.getNumCompare());
             System.out.println("Number of Exchange " + sort.getNumSwap());
-            try (BufferedWriter out = FileIO.openWriter("output.txt")) {
-                out.append(sort.printList());
+            try (PrintStream out = new PrintStream("output.txt")) {
+                out.println(sort.printList());
             }
         } else {
             System.out.println("Sorting fails");

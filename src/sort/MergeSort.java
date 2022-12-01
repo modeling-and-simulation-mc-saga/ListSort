@@ -1,8 +1,8 @@
 package sort;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import myLib.utils.Utils;
 
 /**
  *
@@ -64,7 +64,7 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSort<T> {
      * @return
      */
     private List<T> mergeList(int left, int middle, int right) {
-        List<T> tmp = Utils.createList();
+        List<T> tmp = new ArrayList<>();
         int leftIndex = left;
         int rightIndex = middle;
         while (leftIndex < middle || rightIndex < right) {
@@ -101,7 +101,6 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSort<T> {
         testRun(new MergeSort<>(data));
         List<Data> data2 = Data.createData(100, 0.5);
         testStable(new MergeSort<>(data2));
-
     }
 
 }

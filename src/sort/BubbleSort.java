@@ -20,7 +20,8 @@ public class BubbleSort<T extends Comparable<T>>
 
     /**
      * sort の実装
-     * @return 
+     *
+     * @return
      */
     @Override
     public List<T> doSort() {
@@ -43,10 +44,9 @@ public class BubbleSort<T extends Comparable<T>>
         int numData = 100;
         List<Data> data = Data.createData(numData);
         testRun(new BubbleSort<>(data));
-                System.out.println("test stability");
+        System.out.println("test stability");
         List<Data> data2 = Data.createData(100, 0.5);
         testStable(new BubbleSort<>(data2));
-
     }
 
 }
