@@ -20,16 +20,12 @@ public class InsertionSort<T extends Comparable<T>>
 
     @Override
     public List<T> doSort(){
-        int n = data.size();
-        for(int i=0;i<n;i++){
-            int m=i;
-            for (int j=i;j<n;j++){
-                if(lessByIndex(j,m)){
-                    m=j;
-                }
-            }
-            if(m!=i)insert(m,i);
-        }
+        
+        
+        
+        
+        
+        
         return data;
     }
 
