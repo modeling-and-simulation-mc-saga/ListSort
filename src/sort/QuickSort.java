@@ -20,11 +20,6 @@ public class QuickSort<T extends Comparable<T>>
     public QuickSort() {
     }
 
-    /**
-     * sort の実装
-     *
-     * @return
-     */
     @Override
     public List<T> doSort() {
         sortSub(0, data.size() - 1);
@@ -32,7 +27,7 @@ public class QuickSort<T extends Comparable<T>>
     }
 
     /**
-     * sortの実態：範囲を指定
+     * implementing sort: specifying area by indexes of elements
      *
      * @param left
      * @param right
@@ -47,13 +42,17 @@ public class QuickSort<T extends Comparable<T>>
     }
 
     /**
-     * 分配作業：右端の要素よりも小さいものが戻り値よりも先に、
+     * partitioning:
      *
-     * 右端の要素よりも大きいものが戻り値よりも後になる
+     * select the rightmost element as the pivot
      *
-     * @param left 範囲の左端
-     * @param right 範囲の右端
-     * @return 右端の要素が移動した先のインデクス
+     * move elements less than the pivot to the left of the pivot
+     *
+     * move elements greater than the pivoto to the right of the pivot
+     *
+     * @param left
+     * @param right
+     * @return return the index of the pivot
      */
     protected int partition(int left, int right) {
         int fromLeft = left - 1;

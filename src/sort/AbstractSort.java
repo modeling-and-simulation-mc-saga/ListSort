@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * リスト整列の抽象クラス。対象はComparableを実装
+ * Abstract class for sorting.  Targes are instances of Comparable
  *
  * @author tadaki
  * @param <T>
@@ -16,20 +16,20 @@ public abstract class AbstractSort<T extends Comparable<T>> {
 
     public static final String LINE_SEPARATOR
             = System.getProperty("line.separator");
-    protected List<T> data;//対象となるデータのリスト
-    private int numSwap;//要素入替回数
-    private int numComp;//要素比較回数
+    protected List<T> data;//Target data list
+    private int numSwap;//The number of exchanging elements
+    private int numComp;//The number of comparing elements
     private boolean counting = true;
     protected boolean debug = false;
 
     /**
-     * コンストラクタ
+     * Constructor
      *
      * @param list
      */
     public AbstractSort(List<T> list) {
         data = Collections.synchronizedList(new LinkedList<>());
-        list.forEach(t -> data.add(t));
+        data.addAll(list);
         numSwap = 0;
         numComp = 0;
     }
@@ -38,26 +38,26 @@ public abstract class AbstractSort<T extends Comparable<T>> {
     }
 
     /**
-     * 対象となるデータを再設定
+     * Resetting data
      *
      * @param list
      */
     public void setData(List<T> list) {
         data = Collections.synchronizedList(new LinkedList<>());
-        list.forEach(t -> data.add(t));
+        data.addAll(list);
         numSwap = 0;
         numComp = 0;
     }
 
     /**
-     * 整列を実行する抽象メソッド
+     * Abstract method for sorting
      *
      * @return
      */
     abstract public List<T> doSort();
 
     /**
-     * 大小関係 (vはwより小さい)
+     * v is less than w
      *
      * @param v
      * @param w
@@ -78,7 +78,7 @@ public abstract class AbstractSort<T extends Comparable<T>> {
     }
 
     /**
-     * 大小関係 (要素i は要素jより小さい)
+     * i-th element  less than j-th element
      *
      * @param i
      * @param j
@@ -93,7 +93,7 @@ public abstract class AbstractSort<T extends Comparable<T>> {
     }
 
     /**
-     * 要素iとjを入れ替える
+     * swap i-th element with j-th element
      *
      * @param i
      * @param j
@@ -112,7 +112,7 @@ public abstract class AbstractSort<T extends Comparable<T>> {
     }
 
     /**
-     * 位置iの要素を位置jの前へ挿入
+     * insert j-th element before i-th element
      *
      * @param i
      * @param j
@@ -123,7 +123,7 @@ public abstract class AbstractSort<T extends Comparable<T>> {
     }
 
     /**
-     * 整列されているかを判定
+     * return true if the data is sorted
      *
      * @return
      */
@@ -138,7 +138,7 @@ public abstract class AbstractSort<T extends Comparable<T>> {
     }
 
     /**
-     * リストを文字列化
+     * convert data into string
      *
      * @return 
      */
@@ -171,8 +171,9 @@ public abstract class AbstractSort<T extends Comparable<T>> {
     public int getSize(){
         return data.size();
     }
+    
     /**
-     * テストランを実施
+     * test run
      *
      * @param sort
      * @throws IOException
@@ -198,8 +199,9 @@ public abstract class AbstractSort<T extends Comparable<T>> {
     }
 
     /**
-     * 整列結果の安定性を確認
-     * @param sort 
+     * testing stability of result
+     * 
+    * @param sort 
      */
     static public void testStable(AbstractSort<Data> sort) {
         List<Data> data = sort.doSort();

@@ -18,11 +18,6 @@ public class SelectionSort<T extends Comparable<T>>
     public SelectionSort() {
     }
 
-    /**
-     * sort の実装
-     *
-     * @return
-     */
     @Override
     public List<T> doSort() {
         int n = data.size();

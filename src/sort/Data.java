@@ -2,34 +2,35 @@ package sort;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
- * 整列アルゴリズム用のサンプルデータクラス
+ * Sample data class for sorting
  *
- * Comparableとすることで、比較可能であることを示す
+ * Instance of Comparable
  *
  * @author tadaki
  */
 public class Data implements Comparable<Data> {
 
-    //finalとすることで、変更不可とする
+    //Fields are immutable
     public final String label;
     private final int value;
 
     /**
-     * コンストラクタ：ラベルと値を与えてインスタンスを生成
+     * Constructor: creating an instance with label and value
      *
      * @param label
      * @param value
      */
     public Data(String label, int value) {
-        //引数の値をインスタンス(this)へ代入
+        //substitute arguments into fields
         this.label = label;
         this.value = value;
     }
 
     /**
-     * 同じクラスの他のインスタンスと比較
+     * comparing with other instance of the same class
      *
      * @param o
      * @return
@@ -40,7 +41,7 @@ public class Data implements Comparable<Data> {
     }
 
     /**
-     * インスタンスを文字列で表現
+     * convert this instance into string
      *
      * @return
      */
@@ -50,18 +51,23 @@ public class Data implements Comparable<Data> {
     }
 
     /**
-     * テストデータの生成
+     * generating test data
      *
-     * @param numData データ数
-     * @return テストデータをリストで返す
+     * @param numData the number of elements
+     * @return
      */
-     static public List<Data> createData(int numData){
-         return createData(numData,10.);
-     }
-    static public List<Data> createData(int numData,double p) {
+    static public List<Data> createData(int numData) {
+        return createData(numData, 10.);
+    }
+
+    static public List<Data> createData(int numData, double p) {
+        return createData(numData, p, new Random(48L));
+    }
+
+    static public List<Data> createData(int numData, double p, Random random) {
         List<Data> data = new ArrayList<>();
         for (int i = 0; i < numData; i++) {
-            int k = (int) (p * numData * Math.random());
+            int k = (int) (p * numData * random.nextDouble());
             data.add(new Data(String.valueOf(i), k));
         }
         return data;

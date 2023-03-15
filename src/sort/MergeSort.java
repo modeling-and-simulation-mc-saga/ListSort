@@ -19,11 +19,6 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSort<T> {
         super();
     }
 
-    /**
-     * sort の実装
-     *
-     * @return
-     */
     @Override
     public List<T> doSort() {
         sortSub(0, data.size());
@@ -31,7 +26,7 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSort<T> {
     }
 
     /**
-     * sortの実態：範囲を指定
+     * implementing sort: specifying area by indexes of elements
      *
      * @param left
      * @param right
@@ -43,11 +38,11 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSort<T> {
         if (right == left + 1) {
             return;
         }
-        //範囲を二分割して再帰
+        //devide list into two sub-list
         int middle = (right + left) / 2;
         sortSub(left, middle);
         sortSub(middle, right);
-        //二つの整列済みリストをmergeする
+        //merge two sorted lists
         List<T> tmpList = mergeList(left, middle, right);
         for (int p = 0; p < tmpList.size(); p++) {
             data.set(left + p, tmpList.get(p));
@@ -56,7 +51,7 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSort<T> {
     }
 
     /**
-     * 二つの整列済みリストをmergeする
+     * merge two sorted lists
      *
      * @param left
      * @param middle
@@ -67,19 +62,7 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSort<T> {
         List<T> tmp = new ArrayList<>();
         int leftIndex = left;
         int rightIndex = middle;
-        while (leftIndex < middle || rightIndex < right) {
-            if (leftIndex >= middle) {//左側終了
-                for (int k = rightIndex; k < right; k++) {
-                    tmp.add(data.get(k));
-                }
-                return tmp;
-            }
-            if (rightIndex >= right) {//右側終了
-                for (int k = leftIndex; k < middle; k++) {
-                    tmp.add(data.get(k));
-                }
-                return tmp;
-            }
+        while (leftIndex < middle && rightIndex < right) {
             if (lessByIndex(leftIndex, rightIndex)) {
                 tmp.add(data.get(leftIndex));
                 leftIndex++;
@@ -87,6 +70,14 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSort<T> {
                 tmp.add(data.get(rightIndex));
                 rightIndex++;
             }
+        }
+        //appending remaining elements in left part
+        for (int k = rightIndex; k < right; k++) {
+            tmp.add(data.get(k));
+        }
+        //appending remaining elements in right part
+        for (int k = leftIndex; k < middle; k++) {
+            tmp.add(data.get(k));
         }
         return tmp;
     }

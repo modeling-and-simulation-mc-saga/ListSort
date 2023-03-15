@@ -18,11 +18,6 @@ public class BubbleSort<T extends Comparable<T>>
     public BubbleSort() {
     }
 
-    /**
-     * sort の実装
-     *
-     * @return
-     */
     @Override
     public List<T> doSort() {
         int n = data.size();
